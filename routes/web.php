@@ -16,6 +16,7 @@ Route::resource('topics', 'TopicController')->except(['index']);
 
 Route::post('/comments/{topic}', 'CommentController@store')->name('comments.store');
 Route::post('/commentReply/{comment}', 'CommentController@storeCommentReply')->name('comments.storeReply');
+Route::post('/markedAsSolution/{topic}/{comment}', 'CommentController@markedAsSolution')->name('comments.markedAsSolution');
 
 Auth::routes();
 
