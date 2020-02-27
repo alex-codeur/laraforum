@@ -11,14 +11,18 @@
                     <span class="badge badge-primary">{{ $topic->user->name }}</span>
                 </div>
                 <div class="d-flex justify-content-between align-items-center mt-4">
-                    <a href="{{ route('topics.edit', $topic) }}" class="btn btn-warning">Editer un topic</a>
+                    @can('update', $topic)
+                        <a href="{{ route('topics.edit', $topic) }}" class="btn btn-warning">Editer un topic</a>
+                    @endcan
                     
-                    <form action="{{ route('topics.destroy', $topic) }}" method="POST">
+                    @can('delete', $topic)
+                        <form action="{{ route('topics.destroy', $topic) }}" method="POST">
                         @csrf
                         @method('DELETE')
 
                         <button type="submit" class="btn btn-danger">Supprimer un topic</button>
                     </form>
+                    @endcan
                 </div>
             </div>
         </div>
