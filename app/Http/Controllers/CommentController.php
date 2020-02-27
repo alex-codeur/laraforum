@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Topic;
 use App\Comment;
+use App\Notifications\NewCommentPosted;
 
 class CommentController extends Controller
 {
@@ -24,6 +25,9 @@ class CommentController extends Controller
         $comment->user_id = auth()->user()->id;
 
         $topic->comments()->save($comment);
+
+        //Notification
+        $topic->user->notify(new NewCommentPosted($topic, auth()->user()));
 
         return redirect()->route('topics.show', $topic);
     }
