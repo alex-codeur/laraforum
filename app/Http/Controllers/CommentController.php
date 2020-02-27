@@ -27,4 +27,19 @@ class CommentController extends Controller
 
         return redirect()->route('topics.show', $topic);
     }
+
+    public function storeCommentReply(Comment $comment)
+    {
+        request()->validate([
+            'replyComment' => 'required|min:3'
+        ]);
+
+        $commentReply = new Comment();
+        $commentReply->content = request('replyComment');
+        $commentReply->user_id = auth()->user()->id;
+
+        $comment->comments()->save($commentReply);
+
+        return redirect()->back();
+    }
 }

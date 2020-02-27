@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\User;
+use App\Comment;
 
 class Comment extends Model
 {
@@ -12,6 +13,11 @@ class Comment extends Model
     public function commentable()
     {
         return $this->morphTo();
+    }
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable')->latest();
     }
 
     public function user()
