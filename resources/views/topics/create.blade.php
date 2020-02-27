@@ -19,7 +19,7 @@
 
             <div class="form-group">
                 <label for="content">Titre du topic</label>
-                <textarea class="form-control @error('title') is-invalid @enderror" name="content" id="content"></textarea>
+                <textarea class="form-control @error('content') is-invalid @enderror" name="content" id="content"></textarea>
 
                 @error('content')
                     <div class="invalid-feedback">{{ $errors->first('content') }}</div>
